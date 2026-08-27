@@ -1,4 +1,4 @@
-# NearbyDevices
+# NearbyDevicesSDK
 
 A Swift package for discovering nearby Bluetooth Low Energy (BLE) devices on iOS and macOS, built on Core Bluetooth with a modern Swift concurrency (async/await) API.
 
@@ -22,16 +22,16 @@ Add the package to your project via Swift Package Manager:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/anirbanmaiti/NearbyDevices.git", branch: "main")
+    .package(url: "https://github.com/anirbanmaiti/NearbyDevicesSDK.git", branch: "main")
 ]
 ```
 
-Then add `NearbyDevices` to your target's dependencies:
+Then add `NearbyDevicesSDK` to your target's dependencies:
 
 ```swift
 .target(
     name: "MyApp",
-    dependencies: ["NearbyDevices"]
+    dependencies: ["NearbyDevicesSDK"]
 )
 ```
 
@@ -42,7 +42,7 @@ Then add `NearbyDevices` to your target's dependencies:
 Create a `NearbyDevicesGate`, the concrete implementation of `NearbyDevicesAPI`:
 
 ```swift
-import NearbyDevices
+import NearbyDevicesSDK
 
 struct MyFeatureFlags: NDFeatureFlagProviding {}
 
@@ -108,7 +108,7 @@ Add the Bluetooth usage description to your app's `Info.plist`:
 ## Architecture
 
 ```
-Sources/NearbyDevices
+Sources/NearbyDevicesSDK
 ├── NearbyDevicesAPI.swift      // Public API surface
 ├── NearbyDevicesGate.swift     // Concrete entry point / composition root
 ├── Bluetooth/

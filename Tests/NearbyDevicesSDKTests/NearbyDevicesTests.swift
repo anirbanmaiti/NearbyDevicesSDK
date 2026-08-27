@@ -1,5 +1,5 @@
 import XCTest
-@testable import NearbyDevices
+@testable import NearbyDevicesSDK
 
 final class NearbyDevicesTests: XCTestCase {
     func testExample() throws {
