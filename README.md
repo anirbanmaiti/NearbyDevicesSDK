@@ -133,3 +133,7 @@ Sources/NearbyDevices
 ```
 swift test
 ```
+
+## License
+
+This project is available under the MIT License. See [LICENSE](LICENSE) for details.
