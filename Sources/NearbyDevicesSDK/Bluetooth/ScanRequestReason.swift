@@ -10,7 +10,7 @@ import Foundation
 /// Type of scan request
 public enum ScanRequestReason: String, Sendable {
     /// Scan without duplicate filtering. Can be used for RSSI sampling.
-    case focus
+    case active
 
     /// Scan with duplicate filtering.
     case background
@@ -22,14 +22,14 @@ extension ScanRequestReason {
     /// Corresponding ServiceUUIDs for the request
     var defaultServiceUUIDs: [CoreUUID] {
         switch self {
-        case .focus, .background: return []
+        case .active, .background: return []
         }
     }
     
     /// Denotes whether the request allows duplicate discovery.
     var allowDuplicates: Bool {
         switch self {
-        case .focus:
+        case .active:
             return true
         case .background:
             return false
@@ -40,7 +40,7 @@ extension ScanRequestReason {
 struct ScanServiceUUIDProvider {
     func serviceUUIDs(for scanReason: ScanRequestReason) -> Set<CoreUUID> {
         switch scanReason {
-        case .focus, .background:
+        case .active, .background:
             return Set(scanReason.defaultServiceUUIDs)
         }
     }

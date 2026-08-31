@@ -7,7 +7,7 @@ A Swift package for discovering nearby Bluetooth Low Energy (BLE) devices on iOS
 - **Simple async API** — a single `NearbyDevicesAPI` entry point for permission handling, Bluetooth state, and device discovery.
 - **Live device stream** — observe nearby devices as a `CurrentValueStream<Set<DiscoveredDevice>>` that updates as devices appear, change, or go stale.
 - **Automatic staleness handling** — devices older than a configurable `maxAge` are removed from the stream automatically.
-- **Scan modes** — `ScanRequestReason.focus` scans without duplicate filtering (useful for RSSI sampling); `.background` scans with duplicate filtering.
+- **Scan modes** — `ScanRequestReason.active` scans without duplicate filtering (useful for RSSI sampling); `.background` scans with duplicate filtering.
 - **Swift 6 ready** — builds in the Swift 6 language mode with strict concurrency.
 - **Testable by design** — Core Bluetooth types are abstracted behind protocols (`CoreCentralManaging`, `CorePeripheralRepresentable`, …) so the stack can be exercised without real hardware.
 
@@ -68,7 +68,7 @@ print(authorization.value)
 
 ```swift
 // Start scanning. Pass a duration, or nil to scan until stopped manually.
-try await nearbyDevices.search(reason: .focus, duration: nil)
+try await nearbyDevices.search(reason: .active, duration: nil)
 
 // Observe discovered devices; entries older than 30 seconds are dropped.
 let devicesStream = await nearbyDevices.nearbyDevicesStream(maxAge: 30)
@@ -79,7 +79,7 @@ for await devices in devicesStream.stream {
 }
 
 // Stop scanning when done.
-await nearbyDevices.stopSearch(reason: .focus)
+await nearbyDevices.stopSearch(reason: .active)
 ```
 
 `CurrentValueStream` also offers a Combine-style `sink` and synchronous access to the latest value via `.value`.
